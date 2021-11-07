@@ -14,17 +14,17 @@ extras = {
 }
 
 setuptools.setup(
-    name="python-package-template",
+    name="osm-rasterize",
     version="0.0.0",
     author="Ruben Lipperts",
     author_email="",
-    description="Write a short description of the package",
+    description="Map OSM data onto a grid",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/rlipperts/python_package_template",
+    url="https://github.com/rlipperts/osm-rasterize",
     package_dir={'': 'src'},
-    packages=['package_name'],
-    package_data={'package_name': ['py.typed']},
+    packages=['osm-rasterize'],
+    package_data={'osm-rasterize': ['py.typed']},
     tests_require=test_deps,
     extras_require=extras,
     install_requires=[
@@ -33,7 +33,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-        "Topic :: https://pypi.org/classifiers/",
+        "Topic :: Games/Entertainment",
     ],
     python_requires='~=3.9',
 )
