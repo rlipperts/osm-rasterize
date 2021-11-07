@@ -1,0 +1,1 @@
+[bbox:41.89088797265867,12.488446980714798,41.89177449419739,12.489861845970154];(nwr["landuse"];nwr["natural"];way["highway"];nwr["railway"];nwr["aeroway"];nwr["leisure"];nwr["power"];nwr["military"];relation["place"];nwr["amenity"];way["waterway"];node["man-made"];);(._;>;);out;
