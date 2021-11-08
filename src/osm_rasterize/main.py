@@ -1,6 +1,7 @@
 """
 Implement the functionality here (and in sub-packages).
 """
+import json
 from pathlib import Path
 
 from OSMPythonTools.overpass import Overpass, overpassQueryBuilder  # type: ignore
@@ -47,4 +48,4 @@ out_dir = Path.cwd() / 'out'
 out_dir.mkdir(exist_ok=True)
 for selector, result in results.items():
     with open(out_dir / f'{selector}.json', mode='w', encoding='utf8') as file:
-        file.write(str(result.toJSON()))
+        json.dump(result.toJSON(), file, indent=4)
