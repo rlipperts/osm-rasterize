@@ -14,7 +14,7 @@ extras = {
 }
 
 setuptools.setup(
-    name="osm-rasterize",
+    name="osm_rasterize",
     version="0.0.0",
     author="Ruben Lipperts",
     author_email="",
@@ -23,8 +23,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/rlipperts/osm-rasterize",
     package_dir={'': 'src'},
-    packages=['osm-rasterize'],
-    package_data={'osm-rasterize': ['py.typed']},
+    packages=['osm_rasterize'],
+    package_data={'osm_rasterize': ['py.typed']},
     tests_require=test_deps,
     extras_require=extras,
     install_requires=[

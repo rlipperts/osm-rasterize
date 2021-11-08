@@ -14,8 +14,8 @@ pip install git+ssh://git@github.com/rlipperts/osm-rasterize.git
 To automatically install the logging configurator with your python package include these lines in your setup.py
 ```python
 install_requires = [
-    'osm-rasterize @ git+ssh://git@github.com/rlipperts/osm-rasterize.
-                       git@master#egg=osm-rasterize-0.0.0',
+    'osm_rasterize @ git+ssh://git@github.com/rlipperts/osm_rasterize.
+                       git@master#egg=osm_rasterize-0.0.0',
 ],
 ```
 Make sure you update the version in the `egg=osm-rasterize-...` portion to the correct version 
