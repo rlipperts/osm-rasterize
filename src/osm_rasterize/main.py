@@ -32,7 +32,6 @@ def build_queries():
             bbox=bounding_box,
             elementType=element_type,
             selector=f'"{selector}"~""',
-            # selector='"landuse"~""',
             out='body',
             includeGeometry=True,
         )
@@ -49,3 +48,7 @@ out_dir.mkdir(exist_ok=True)
 for selector, result in results.items():
     with open(out_dir / f'{selector}.json', mode='w', encoding='utf8') as file:
         json.dump(result.toJSON(), file, indent=4)
+#
+# long = Longitude(40.3)
+# print(long+200)
+# print(Longitude)
