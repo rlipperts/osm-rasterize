@@ -8,7 +8,7 @@ from osm_rasterize.gcs.math import ring_addition
 class Latitude:
     """
     Latitude units.
-    Cannot exceed 180 in the positive or negative.
+    Cannot exceed 90 in the positive or negative.
     """
 
     # todo: merge latitude and longitude in a parent class
