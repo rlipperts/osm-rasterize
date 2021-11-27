@@ -1,12 +1,27 @@
-from osm_rasterize.gcs.longitude import Longitude
-from osm_rasterize.gcs.latitude import Latitude
+from typing import TypedDict
+
+from osm_rasterize.gcs.long_lat import Longitude
+from osm_rasterize.gcs.long_lat import Latitude
+
+
+class RawCoordinate(TypedDict):
+    lat: float
+    lon: float
 
 
 class Coordinate:
 
     def __init__(self, lat: Latitude, long: Longitude):
-        self._lat = lat
-        self._long = long
+        self.lat = lat
+        self.long = long
+
+    @classmethod
+    def from_float(cls, lat: float, long: float):
+        return cls(Latitude(lat), Longitude(long))
+
+    @classmethod
+    def from_raw(cls, raw: RawCoordinate):
+        return cls.from_float(raw['lat'], raw['lon'])
 
     @classmethod
     def from_xy_coordinates(cls, x: int, y: int):  # pylint: disable=invalid-name
@@ -16,19 +31,3 @@ class Coordinate:
     def to_xy_coordinates(self) -> tuple[int, int]:
         # todo: implement me!
         pass
-
-    @property
-    def latitude(self):
-        return self._lat.latitude
-
-    @latitude.setter
-    def latitude(self, value: float):
-        self._lat.latitude = value
-
-    @property
-    def longitude(self):
-        return self._long.longitude
-
-    @longitude.setter
-    def longitude(self, value: float):
-        self._long.longitude = value

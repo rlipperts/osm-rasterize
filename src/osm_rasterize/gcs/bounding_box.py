@@ -1,9 +1,16 @@
 import math
+from typing import TypedDict
 
-from osm_rasterize.gcs.errors import InvalidBoundsError
-from osm_rasterize.gcs.latitude import Latitude
-from osm_rasterize.gcs.longitude import Longitude
+from osm_rasterize.gcs.error import InvalidBoundsError
+from osm_rasterize.gcs.long_lat import Latitude, Longitude
 from osm_rasterize.gcs.coordinate import Coordinate
+
+
+class RawBoundingBox(TypedDict):
+    minlat: float
+    minlon: float
+    maxlat: float
+    maxlon: float
 
 
 class BoundingBox:
@@ -22,26 +29,42 @@ class BoundingBox:
         return cls(Latitude(south), Longitude(west), Latitude(north), Longitude(east))
 
     @classmethod
+    def from_raw(cls, raw: RawBoundingBox):
+        return cls.from_floats(raw['minlat'], raw['minlon'], raw['maxlat'], raw['maxlon'])
+
+    @classmethod
     def from_list(cls, bbox: list[float]):
         return cls.from_floats(*bbox)
 
     @classmethod
     def around_center(cls, center: Coordinate, radius_in_meters: int):
         return cls(
-            center.latitude - radius_in_meters / 111111,
-            center.longitude - radius_in_meters / (111111 * math.cos(center.latitude)),
-            center.latitude + radius_in_meters / 111111,
-            center.longitude + radius_in_meters / (111111 * math.cos(center.latitude))
+            center.latitude - cls._meter_to_lat(radius_in_meters),
+            center.longitude - cls._meter_to_long(radius_in_meters, center.latitude),
+            center.latitude + cls._meter_to_lat(radius_in_meters),
+            center.longitude + cls._meter_to_long(radius_in_meters, center.latitude)
         )
 
     @classmethod
-    def between_coordinats(cls, coordinate_a: Coordinate, coordinate_b: Coordinate):
-        pass
+    def between_coordinates(cls, coordinate_a: Coordinate, coordinate_b: Coordinate):
+        if coordinate_a.latitude < coordinate_b.latitude:
+            south = coordinate_a.latitude
+            north = coordinate_b.latitude
+        else:
+            north = coordinate_a.latitude
+            south = coordinate_b.latitude
+        if coordinate_a.longitude < coordinate_b.longitude:
+            west = coordinate_a.longitude
+            east = coordinate_b.longitude
+        else:
+            west = coordinate_a.longitude
+            east = coordinate_b.longitude
+        return cls(south, west, north, east)
 
     @staticmethod
-    def _meter_to_lat(meters: int):
-        return meters / 111111
+    def _meter_to_lat(meters: float) -> Latitude:
+        return Latitude(meters / 111111)
 
     @staticmethod
-    def _meter_to_long(meters: int, lat: Latitude):
-        return meters / (111111 * math.cos(lat.latitude))
+    def _meter_to_long(meters: float, lat: Latitude) -> Longitude:
+        return Longitude(meters / (111111 * math.cos(lat)))

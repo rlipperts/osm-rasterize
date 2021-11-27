@@ -2,11 +2,7 @@ class GeographyError(Exception):
     pass
 
 
-class InvalidLatitudeError(GeographyError):
-    pass
-
-
-class InvalidLongitudeError(GeographyError):
+class InvalidCoordinateError(GeographyError):
     pass
 
 

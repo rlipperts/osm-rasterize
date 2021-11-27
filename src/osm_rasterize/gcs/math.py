@@ -1,4 +1,4 @@
-from osm_rasterize.gcs.errors import InvalidBoundsError
+from osm_rasterize.gcs.error import InvalidBoundsError
 
 
 def ring_addition(summand_a, summand_b, upper_limit, lower_limit=0):
