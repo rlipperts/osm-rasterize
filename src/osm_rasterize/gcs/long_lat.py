@@ -1,5 +1,3 @@
-import numbers
-
 from osm_rasterize.gcs.error import InvalidCoordinateError, GeographyError
 from osm_rasterize.gcs.math import ring_addition
 
@@ -21,7 +19,8 @@ class Itude(float):
     def __new__(cls, value):
         return float.__new__(cls, value)
 
-    def __init__(self, value: numbers.Number):
+    def __init__(self, value: float):
+        super().__init__()
         self.value = value
 
     def __add__(self, other):
@@ -33,6 +32,15 @@ class Itude(float):
     def __iadd__(self, other):
         self.value = self._add(other)
 
+    def __sub__(self, other):
+        return self._create(self._sub(other))
+
+    def __rsub__(self, other):
+        return self._create(self._sub(other))
+
+    def __isub__(self, other):
+        self.value = self._sub(other)
+
     def __ge__(self, other):
         return self.value >= other
 
@@ -43,6 +51,10 @@ class Itude(float):
             return ring_addition(self._value, other, self.upper_limit, self.lower_limit)
         except AttributeError:
             return ring_addition(self._value, other.value, self.upper_limit, self.lower_limit)
+
+    def _sub(self, other):
+        # todo: Does this even work with subtraction? make tests!
+        return self._add(-other)
 
     @classmethod
     def _create(cls, value):

@@ -38,6 +38,7 @@ class BoundingBox:
 
     @classmethod
     def around_center(cls, center: Coordinate, radius_in_meters: int):
+        # noinspection PyTypeChecker
         return cls(
             center.latitude - cls._meter_to_lat(radius_in_meters),
             center.longitude - cls._meter_to_long(radius_in_meters, center.latitude),

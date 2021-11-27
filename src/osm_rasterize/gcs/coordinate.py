@@ -11,9 +11,9 @@ class RawCoordinate(TypedDict):
 
 class Coordinate:
 
-    def __init__(self, lat: Latitude, long: Longitude):
-        self.lat = lat
-        self.long = long
+    def __init__(self, latitude: Latitude, longitude: Longitude):
+        self.latitude = latitude
+        self.longitude = longitude
 
     @classmethod
     def from_float(cls, lat: float, long: float):
