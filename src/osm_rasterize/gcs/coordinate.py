@@ -15,6 +15,12 @@ class Coordinate:
         self.latitude = latitude
         self.longitude = longitude
 
+    def __str__(self):
+        return f'Coordinate(latitude={self.latitude}, longitude={self.longitude})'
+
+    def __repr__(self):
+        return str(self)
+
     @classmethod
     def from_float(cls, lat: float, long: float):
         return cls(Latitude(lat), Longitude(long))

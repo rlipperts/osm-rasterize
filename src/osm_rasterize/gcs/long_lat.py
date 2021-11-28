@@ -1,5 +1,5 @@
 from osm_rasterize.gcs.error import InvalidCoordinateError, GeographyError
-from osm_rasterize.gcs.math import ring_addition
+from osm_rasterize.gcs.math import ring_addition, ring_subtraction
 
 
 class Itude(float):
@@ -53,8 +53,12 @@ class Itude(float):
             return ring_addition(self._value, other.value, self.upper_limit, self.lower_limit)
 
     def _sub(self, other):
-        # todo: Does this even work with subtraction? make tests!
-        return self._add(-other)
+        try:
+            if isinstance(other, Itude) and self.__class__ != other.__class__:
+                raise GeographyError('Cannot calculate difference out of Latitude and Longitude!')
+            return ring_subtraction(self._value, other, self.upper_limit, self.lower_limit)
+        except AttributeError:
+            return ring_subtraction(self._value, other.value, self.upper_limit, self.lower_limit)
 
     @classmethod
     def _create(cls, value):

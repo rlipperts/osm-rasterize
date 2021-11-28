@@ -14,6 +14,10 @@ class RawBoundingBox(TypedDict):
 
 
 class BoundingBox:
+    south: Latitude
+    west: Longitude
+    north: Latitude
+    east: Longitude
 
     def __init__(self, south: Latitude, west: Longitude, north: Latitude, east: Longitude):
         if south >= north or west >= east:
@@ -24,6 +28,13 @@ class BoundingBox:
         self.north = north
         self.east = east
 
+    def __str__(self):
+        return f'BoundingBox(south={self.south}, west={self.west}, north={self.north}, ' \
+               f'east={self.east})'
+
+    def __repr__(self):
+        return str(self)
+
     @classmethod
     def from_floats(cls, south: float, west: float, north: float, east: float):
         return cls(Latitude(south), Longitude(west), Latitude(north), Longitude(east))
@@ -31,10 +42,6 @@ class BoundingBox:
     @classmethod
     def from_raw(cls, raw: RawBoundingBox):
         return cls.from_floats(raw['minlat'], raw['minlon'], raw['maxlat'], raw['maxlon'])
-
-    @classmethod
-    def from_list(cls, bbox: list[float]):
-        return cls.from_floats(*bbox)
 
     @classmethod
     def around_center(cls, center: Coordinate, radius_in_meters: int):
@@ -58,14 +65,27 @@ class BoundingBox:
             west = coordinate_a.longitude
             east = coordinate_b.longitude
         else:
-            west = coordinate_a.longitude
-            east = coordinate_b.longitude
+            east = coordinate_a.longitude
+            west = coordinate_b.longitude
         return cls(south, west, north, east)
 
     @staticmethod
     def _meter_to_lat(meters: float) -> Latitude:
+        # todo these transformations should have their own separate class
         return Latitude(meters / 111111)
 
     @staticmethod
     def _meter_to_long(meters: float, lat: Latitude) -> Longitude:
         return Longitude(meters / (111111 * math.cos(lat)))
+
+    @property
+    def height(self):
+        return self.north - self.south
+
+    @property
+    def width(self):
+        return self.east - self.west
+
+    @property
+    def overpass_bbox(self):
+        return f'[bbox:{self.south},{self.west},{self.north},{self.east}]'

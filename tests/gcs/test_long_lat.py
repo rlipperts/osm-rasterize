@@ -52,5 +52,28 @@ def test_cross_addition():
         Latitude(20) + Longitude(20)
 
 
+def test_number_subtraction():
+    result = Latitude(20) - 20
+    assert isinstance(result, Latitude)
+    assert result.value == 0
+
+
+def test_right_subtraction():
+    result = 20 - Latitude(20)
+    assert isinstance(result, Latitude)
+    assert result.value == 0
+
+
+def test_class_subtraction():
+    result = Latitude(20) - Latitude(20)
+    assert isinstance(result, Latitude)
+    assert result.value == 0
+
+
+def test_cross_subtraction():
+    with pytest.raises(GeographyError):
+        Latitude(20) - Longitude(20)
+
+
 def test_overflow_addition():
     assert Latitude(90) + 10 == -80
