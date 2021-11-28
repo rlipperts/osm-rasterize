@@ -5,8 +5,4 @@ import json
 
 
 def test_main():
-    with open('out/leisure.json') as f:
-        data = json.load(f)
-        for leisure in data['elements']:
-            print(leisure['type'])
     assert True
