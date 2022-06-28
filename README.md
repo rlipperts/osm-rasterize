@@ -32,6 +32,9 @@ specified in the logging-configurators setup.py. This might not work if you plan
 * Map Transformations
     * [Geodesic Grid as alternative to square-based representations?](https://en.wikipedia.org/wiki/Geodesic_grid)
     * [Better square mapping](https://en.wikipedia.org/wiki/Quadrilateralized_spherical_cube)
+    * [Geospatial Indexing Tools Overview](https://github.com/sacridini/Awesome-Geospatial#python=)
+    * [Quadtree](https://en.wikipedia.org/wiki/Quadtree)
+    * [Python Bindings (but: small project)](https://github.com/EL-BID/BabelGrid) for [google s2geometry](http://s2geometry.io/about/overview)
 * Tools
     * [Tile Map Editor](https://www.mapeditor.org/)
     * [Overpass Query online interpreter](https://overpass-turbo.eu/)
