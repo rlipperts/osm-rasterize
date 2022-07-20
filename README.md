@@ -29,7 +29,12 @@ specified in the logging-configurators setup.py. This might not work if you plan
 
 ## Link Dump
 
+* OSM Data parsing
+    * [OSMnx](https://github.com/gboeing/osmnx) to retrieve OSM-data from Overpass API and parso into Geopandas format (but it seems to be focussed on network data)
+    *  [Pyrosm](https://pyrosm.readthedocs.io/en/latest/) to parse OSM-data from `.osm.pbf` formatted files into Geopandas format
+    *  [Geofabrik](http://download.geofabrik.de/) to obtain `.osm.pbf` data for the whole world (roughly 55GB overall)
 * Map Transformations
+    * For the beginning use whatever [Geopandas](https://geopandas.org/en/stable/docs.html) provides 
     * [Geodesic Grid as alternative to square-based representations?](https://en.wikipedia.org/wiki/Geodesic_grid)
     * [Better square mapping](https://en.wikipedia.org/wiki/Quadrilateralized_spherical_cube)
     * [Geospatial Indexing Tools Overview](https://github.com/sacridini/Awesome-Geospatial#python=)
@@ -40,5 +45,6 @@ specified in the logging-configurators setup.py. This might not work if you plan
     * [Overpass Query online interpreter](https://overpass-turbo.eu/)
 * Ressources
     * [Tuxemon - open source tiles and pokemon](https://github.com/Tuxemon/Tuxemon/tree/development/mods/tuxemon/gfx/tilesets)
-* Mapping tiles to Polygons
-    * [Using Geopandas or Shapely](https://www.matecdev.com/posts/point-in-polygon.html)
+* Polygons, Shapes and Points with x, y Coordinates
+    * [Map polygons to tiles w/ Geopandas and Shapely](https://www.matecdev.com/posts/point-in-polygon.html)
+    * Use [Shapely](https://github.com/shapely/shapely) for general Geometry data stuff (Points, Polygons, Path-Extrusion, ..)
