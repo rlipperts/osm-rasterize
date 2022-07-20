@@ -40,3 +40,5 @@ specified in the logging-configurators setup.py. This might not work if you plan
     * [Overpass Query online interpreter](https://overpass-turbo.eu/)
 * Ressources
     * [Tuxemon - open source tiles and pokemon](https://github.com/Tuxemon/Tuxemon/tree/development/mods/tuxemon/gfx/tilesets)
+* Mapping tiles to Polygons
+    * [Using Geopandas or Shapely](https://www.matecdev.com/posts/point-in-polygon.html)
